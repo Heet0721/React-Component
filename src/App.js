@@ -1,4 +1,32 @@
+import { useState } from 'react';
+import { supabase } from './supabaseClient';
 import './App.css';
+
+function Library() {
+  const [myBooks, setMyBooks] = useState([]);
+  async function getBooks() {
+    let { data: books, error } = await supabase
+      .from('books')
+      .select ('*')
+    setMyBooks (books) ;
+  }
+  getBooks();
+  return (
+    <table className="my-table">
+    {
+      myBooks.map(b => (
+        <tr>
+          <td>{b.title}</td>
+          <td>{b.ISBN}</td>
+          <td>{b.Author}</td>
+        </tr>
+      ))
+    }
+  </table>
+  
+  );
+}
+
 
 function Header() {
   return (
@@ -62,8 +90,15 @@ function GameRack() {
 }  
 
 function LikeButton() {
+  const [count, setCount] = useState(0);
+  function doLike() {
+    setCount(count + 1);
+  }
   return (
-    <button>Like</button>
+    <>
+      <h3>This is a Like Button</h3>
+      <button onClick ={doLike}> Like {count} </button>
+    </>
   );
 }
 
@@ -72,6 +107,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Library />
         <Header />
         <FavGame />
         <GameRack />

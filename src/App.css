@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.my-table {
+  border-collapse:separate;
+  width: 100%;
+}
+
+.my-table td, .my-table th {
+  border: 2px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.my-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.my-table tr:hover {
+  background-color: #675f5f;
+}
